@@ -1,0 +1,13 @@
+{
+  "mcp": {
+    "headroom": {
+      "type": "local",
+      "command": [
+        "/Users/vlc2-dkfjy2m4r7/.local/bin/headroom",
+        "mcp",
+        "serve"
+      ],
+      "enabled": true
+    }
+  }
+}

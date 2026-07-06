@@ -1,0 +1,71 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "@tarquinen/opencode-dcp@3.1.3",
+    "opencode-mem",
+    "@warp-dot-dev/opencode-warp@0.1.5"
+  ],
+  "agent": {
+    "explore": {
+      "color": "#6366f1",
+      "temperature": 0.2,
+      "steps": 20,
+      "prompt": "CRITICAL ANTI-RECURSION RULE: You are a subagent. You MUST NOT invoke any other agent or use the Task tool. You have no Task tool available. Use your own Read, Grep, Glob, and List tools directly to explore the codebase. Do the work yourself, in this session, right now. If you feel the urge to delegate, that is a signal to start using your tools immediately instead.",
+      "permission": {
+        "task": "deny",
+        "websearch": "deny",
+        "webfetch": "deny"
+      }
+    },
+    "general": {
+      "color": "#6b7280",
+      "temperature": 0.3,
+      "steps": 25,
+      "prompt": "CRITICAL ANTI-RECURSION RULE: You are a subagent. You MUST NOT invoke any other agent or use the Task tool unless explicitly instructed by the user. Do the work yourself using your available tools.",
+      "permission": {
+        "task": "deny",
+        "websearch": "deny",
+        "webfetch": "deny"
+      }
+    }
+  },
+  "mcp": {
+    "headroom": {
+      "type": "local",
+      "command": ["/Users/vlc2-dkfjy2m4r7/.local/bin/headroom", "mcp", "serve"],
+      "enabled": true
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    },
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "chrome-devtools-mcp"]
+    }
+  },
+  "provider": {
+    "headroom": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Headroom Proxy",
+      "options": {
+        "baseURL": "http://127.0.0.1:8787/v1"
+      }
+    }
+  },
+  "permission": {
+    "bash": {
+      "*": "allow",
+      "rm *": "ask",
+      "gh *": "allow",
+      "git *": "allow",
+      "ls *": "allow",
+      "grep *": "allow"
+    },
+    "external_directory": {
+      "*": "ask",
+      "~/.config/opencode/context/**": "allow"
+    }
+  }
+}
