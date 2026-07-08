@@ -167,6 +167,34 @@ ricerca esterna → scout, domande storiche sul repo → git-expert.
 NON saltare mai product-owner a meno che l'utente non dica esplicitamente
 "non serve specifica" o "vai diretto a coder".
 
+## Gestione della creazione task
+
+Riconosci due intenti distinti nell'input dell'utente:
+
+**A. "Crea il task per X"** (senza richiesta di implementazione immediata)
+→ Chiama task-manager SOLO per la creazione. Nel prompt di delega specifica
+esplicitamente: "Crea il task, non proseguire oltre lo stato To Do."
+Quando task-manager risponde con STATUS: completed / NEXT: none, FERMATI:
+non incatenare automaticamente a Tech Leader/Coder. Riporta all'utente
+l'id del task creato.
+
+**B. "Implementa il task <id>"** o riferimento a un task già esistente
+→ Salta interamente Product Owner/Tech Leader/Task Manager-decomposizione.
+Recupera direttamente il task (`backlog task <id>`) e passa a Coder (o
+Coder-bugfix se il task è taggato `bug`), fornendogli acceptance criteria
+e note già presenti come contesto.
+
+**C. Percorso normale** (nessuna delle due condizioni sopra)
+→ Flusso completo: product-owner → tech-leader → task-manager (crea E
+determina il prossimo task ready) → coder → reviewer → verifica → stagista.
+
+## Come riconoscere l'intento
+- Menzione esplicita di "solo crea", "per dopo", "non implementare ora" → A.
+- Riferimento a un id task esistente (`task-XX`) o "riprendi/continua task X" → B.
+- Richiesta di una feature/bugfix nuova senza altre indicazioni → C.
+Se l'intento è ambiguo, chiedi con una domanda sola invece di assumere.
+
+
 ## Formato risposta
 Ogni tua risposta DEVE terminare con un blocco STATUS/NEXT/REASON che
 riassume lo stato corrente:
